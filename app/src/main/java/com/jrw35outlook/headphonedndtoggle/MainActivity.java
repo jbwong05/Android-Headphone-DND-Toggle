@@ -9,11 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        writeFile(isChecked ? 1 : 0);
+        writeFile(isChecked ? CHECKED : NOT_CHECKED);
     }
 
     public void onSwitchClick(View view){
@@ -47,16 +45,16 @@ public class MainActivity extends AppCompatActivity {
             if (isChecked) {
                 //Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT);
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                if (!notificationManager.isNotificationPolicyAccessGranted()) {
+                if (notificationManager!=null && !notificationManager.isNotificationPolicyAccessGranted()) {
                     startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
                 }
-                Toast.makeText(getApplicationContext(), "starting", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "starting", Toast.LENGTH_SHORT).show();
                 startService(backgroundService);
             } else {
                 stopService(backgroundService);
             }
         } catch (Exception e){
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileInputStream inputStream = getApplicationContext().openFileInput(CURRENT_APP_STATE_FILENAME);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String currentString = "";
+            String currentString;
             StringBuilder stringBuilder = new StringBuilder();
             while ( (currentString = reader.readLine()) != null ) {
                 stringBuilder.append(currentString);
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         return checked;
     }
 
-    private void writeFile(int checked/*, int running*/){
+    private void writeFile(int checked){
         FileOutputStream outputStream;
         try {
             outputStream = openFileOutput(CURRENT_APP_STATE_FILENAME, Context.MODE_PRIVATE);

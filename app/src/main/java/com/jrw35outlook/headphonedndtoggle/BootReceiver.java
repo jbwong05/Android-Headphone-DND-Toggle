@@ -4,17 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class BootReceiver extends BroadcastReceiver {
     private final String CURRENT_APP_STATE_FILENAME = "state";
     private final int CHECKED = 1;
-    private final int NOT_CHECKED = 0;
-    private File appStateFile;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -31,7 +27,7 @@ public class BootReceiver extends BroadcastReceiver {
         try {
             FileInputStream inputStream = context.openFileInput(CURRENT_APP_STATE_FILENAME);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String currentString = "";
+            String currentString;
             StringBuilder stringBuilder = new StringBuilder();
             while ( (currentString = reader.readLine()) != null ) {
                 stringBuilder.append(currentString);

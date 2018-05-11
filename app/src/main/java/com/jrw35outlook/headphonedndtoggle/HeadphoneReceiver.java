@@ -15,12 +15,16 @@ public class HeadphoneReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast
         AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        AudioDeviceInfo[] devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS);
-        if(devices.length!=0){
-            if(headphonesPluggedIn(devices)){
-                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+        try {
+            AudioDeviceInfo[] devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS);
+            if (devices.length != 0) {
+                if (headphonesPluggedIn(devices)) {
+                    NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+                }
             }
+        } catch (NullPointerException e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
