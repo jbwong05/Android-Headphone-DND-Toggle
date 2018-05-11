@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        writeFile(isChecked ? CHECKED : NOT_CHECKED);
+    protected void onStop(){
+        super.onStop();
+        writeFile(isChecked ? 1 : 0);
     }
 
     public void onSwitchClick(View view){
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 if (notificationManager!=null && !notificationManager.isNotificationPolicyAccessGranted()) {
                     startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
                 }
-                Toast.makeText(getApplicationContext(), "starting", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "starting", Toast.LENGTH_SHORT).show();
                 startService(backgroundService);
             } else {
                 stopService(backgroundService);
