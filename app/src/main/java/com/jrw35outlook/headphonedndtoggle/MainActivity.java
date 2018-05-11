@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             isChecked = !isChecked;
             if (isChecked) {
-                Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT);
+                //Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT);
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 if (!notificationManager.isNotificationPolicyAccessGranted()) {
                     startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);

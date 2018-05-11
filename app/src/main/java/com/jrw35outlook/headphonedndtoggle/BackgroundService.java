@@ -33,14 +33,14 @@ public class BackgroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        Toast.makeText(getApplicationContext(), "Started", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Headphone Service Started", Toast.LENGTH_SHORT).show();
         this.registerReceiver(receiver, filter);
         return START_STICKY;
     }
 
     @Override
     public void onDestroy(){
-        Toast.makeText(getApplicationContext(), "Stopped", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Headphone Service Stopped", Toast.LENGTH_SHORT).show();
         this.unregisterReceiver(receiver);
     }
 }
