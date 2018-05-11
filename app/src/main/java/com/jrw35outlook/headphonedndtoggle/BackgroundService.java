@@ -7,6 +7,10 @@ import android.media.AudioManager;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 public class BackgroundService extends Service {
     private HeadphoneReceiver receiver;
     private IntentFilter filter;
