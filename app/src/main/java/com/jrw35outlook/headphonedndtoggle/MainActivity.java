@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Switch", "Switch is checked");
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 if (notificationManager!=null && !notificationManager.isNotificationPolicyAccessGranted()) {
-                    startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), 0);
+                    startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
                 }
                 Log.d("Background Service", "Service Starting");
                 startService(backgroundService);
