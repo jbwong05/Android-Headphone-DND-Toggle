@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop(){
         super.onStop();
-        writeFile(isChecked ? 1 : 0);
+        writeFile(isChecked ? CHECKED : NOT_CHECKED);
     }
 
     public void onSwitchClick(View view){
@@ -65,8 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializePrivates(){
         if(appStateFile.exists()){
+            Log.d("State File", "State file exists");
             isChecked = readFile();
         } else{
+            Log.d("State file", "State file does not exist");
             writeFile(NOT_CHECKED);
             isChecked = false;
         }
@@ -84,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
                 stringBuilder.append(currentString);
             }
             reader.close();
-            currentString = stringBuilder.toString();
-            checked = (Integer.parseInt(currentString.substring(currentString.indexOf("checked:")+8, currentString.indexOf("checked:")+9))==CHECKED);
+            Log.d("File", stringBuilder.toString());
+            checked = (Integer.parseInt(stringBuilder.toString())==CHECKED);
         } catch (Exception e) {
-            Log.e("File", e.getMessage());
+            Log.e("File", e.toString());
         }
         return checked;
     }
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             outputStream = openFileOutput(CURRENT_APP_STATE_FILENAME, Context.MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-            writer.write("checked:" + checked + "\n");
+            writer.write("" + checked);
             writer.close();
         } catch (Exception e) {
             Log.e("File", e.getMessage());

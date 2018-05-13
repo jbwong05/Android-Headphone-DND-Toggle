@@ -33,8 +33,7 @@ public class BootReceiver extends BroadcastReceiver {
                 stringBuilder.append(currentString);
             }
             reader.close();
-            currentString = stringBuilder.toString();
-            checked = (Integer.parseInt(currentString.substring(currentString.indexOf("checked:")+8, currentString.indexOf("checked:")+9))==CHECKED);
+            checked = (Integer.parseInt(stringBuilder.toString())==CHECKED);
         } catch (Exception e) {
             Log. e("File", e.getMessage());
         }
