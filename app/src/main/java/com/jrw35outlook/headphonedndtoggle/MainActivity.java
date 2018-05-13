@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
-import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,18 +43,18 @@ public class MainActivity extends AppCompatActivity {
         try {
             isChecked = !isChecked;
             if (isChecked) {
-                //Toast.makeText(getApplicationContext(), "checked", Toast.LENGTH_SHORT);
+                Log.d("Switch", "Switch is checked");
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 if (notificationManager!=null && !notificationManager.isNotificationPolicyAccessGranted()) {
                     startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
                 }
-                //Toast.makeText(getApplicationContext(), "starting", Toast.LENGTH_SHORT).show();
+                Log.d("Background Service", "Service Starting");
                 startService(backgroundService);
             } else {
                 stopService(backgroundService);
             }
         } catch (Exception e){
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("Notification Manager", e.getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             currentString = stringBuilder.toString();
             checked = (Integer.parseInt(currentString.substring(currentString.indexOf("checked:")+8, currentString.indexOf("checked:")+9))==CHECKED);
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("File", e.getMessage());
         }
         return checked;
     }
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             writer.write("checked:" + checked + "\n");
             writer.close();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("File", e.getMessage());
         }
     }
 

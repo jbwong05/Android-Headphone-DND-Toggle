@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.IBinder;
-import android.widget.Toast;
+import android.util.Log;
 
 public class BackgroundService extends Service {
     private HeadphoneReceiver receiver;
@@ -29,14 +29,14 @@ public class BackgroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        Toast.makeText(getApplicationContext(), "Headphone Service Started", Toast.LENGTH_SHORT).show();
         this.registerReceiver(receiver, filter);
+        Log.d("Service", "Service Started");
         return START_STICKY;
     }
 
     @Override
     public void onDestroy(){
-        Toast.makeText(getApplicationContext(), "Headphone Service Stopped", Toast.LENGTH_SHORT).show();
         this.unregisterReceiver(receiver);
+        Log.d("Service", "Service Stopped");
     }
 }

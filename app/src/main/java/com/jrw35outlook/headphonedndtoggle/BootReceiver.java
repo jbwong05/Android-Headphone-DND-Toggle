@@ -3,7 +3,7 @@ package com.jrw35outlook.headphonedndtoggle;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
+import android.util.Log;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -36,7 +36,7 @@ public class BootReceiver extends BroadcastReceiver {
             currentString = stringBuilder.toString();
             checked = (Integer.parseInt(currentString.substring(currentString.indexOf("checked:")+8, currentString.indexOf("checked:")+9))==CHECKED);
         } catch (Exception e) {
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log. e("File", e.getMessage());
         }
         return checked;
     }

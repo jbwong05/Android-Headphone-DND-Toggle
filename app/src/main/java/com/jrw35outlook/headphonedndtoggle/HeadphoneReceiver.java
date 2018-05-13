@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
-import android.widget.Toast;
+import android.util.Log;
 
 public class HeadphoneReceiver extends BroadcastReceiver {
 
@@ -24,7 +24,7 @@ public class HeadphoneReceiver extends BroadcastReceiver {
                 }
             }
         } catch (NullPointerException e){
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e("Notification or Audio Manager", e.getMessage());
         }
     }
 
