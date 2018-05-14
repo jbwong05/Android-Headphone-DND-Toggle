@@ -3,7 +3,6 @@ package com.jrw35outlook.headphonedndtoggle;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
-    private final String CURRENT_APP_STATE_FILENAME = "state";
     private final int CHECKED = 1;
     private final int NOT_CHECKED = 0;
     private File appStateFile;
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private File retrieveFile(){
         File directory = getApplicationContext().getFilesDir();
-        return new File(directory, CURRENT_APP_STATE_FILENAME);
+        return new File(directory, String.valueOf(R.string.current_app_state_filename));
     }
 
     private void initializePrivates(){
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean readFile(){
         boolean checked = false;
         try {
-            FileInputStream inputStream = getApplicationContext().openFileInput(CURRENT_APP_STATE_FILENAME);
+            FileInputStream inputStream = getApplicationContext().openFileInput(String.valueOf(R.string.current_app_state_filename));
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String currentString;
             StringBuilder stringBuilder = new StringBuilder();
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     private void writeFile(int checked){
         FileOutputStream outputStream;
         try {
-            outputStream = openFileOutput(CURRENT_APP_STATE_FILENAME, Context.MODE_PRIVATE);
+            outputStream = openFileOutput(String.valueOf(R.string.current_app_state_filename), Context.MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(outputStream);
             writer.write("" + checked);
             writer.close();

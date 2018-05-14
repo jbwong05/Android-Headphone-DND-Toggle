@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Headphone DND Toggle</string>
+    <string name="switch_text">Service Enabled</string>
+    <string name="current_app_state_filename">state</string>
 </resources>

@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class BootReceiver extends BroadcastReceiver {
-    private final String CURRENT_APP_STATE_FILENAME = "state";
     private final int CHECKED = 1;
 
     @Override
@@ -25,7 +24,7 @@ public class BootReceiver extends BroadcastReceiver {
     private boolean shouldStart(Context context){
         boolean checked = false;
         try {
-            FileInputStream inputStream = context.openFileInput(CURRENT_APP_STATE_FILENAME);
+            FileInputStream inputStream = context.openFileInput(String.valueOf(R.string.current_app_state_filename));
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String currentString;
             StringBuilder stringBuilder = new StringBuilder();
