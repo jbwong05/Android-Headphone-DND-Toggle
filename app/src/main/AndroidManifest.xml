@@ -20,16 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <service
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="true" />
         <receiver
             android:name=".HeadphoneReceiver"
-            android:permission="android.permission.ACCESS_NOTIFICATION_POLICY"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="android.permission.ACCESS_NOTIFICATION_POLICY">
         </receiver>
         <receiver
             android:name=".BootReceiver"

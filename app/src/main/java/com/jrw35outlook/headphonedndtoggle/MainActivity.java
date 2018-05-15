@@ -19,6 +19,7 @@ import java.io.OutputStreamWriter;
 public class MainActivity extends AppCompatActivity {
     private final int CHECKED = 1;
     private final int NOT_CHECKED = 0;
+    private final int SET_NOTIFICATION_POLICY_REQUEST = 0;
     private File appStateFile;
     private boolean isChecked;
     private Intent backgroundService;
@@ -41,19 +42,37 @@ public class MainActivity extends AppCompatActivity {
     public void onSwitchClick(View view){
         try {
             isChecked = !isChecked;
-            if (isChecked) {
-                Log.d("Switch", "Switch is checked");
+            if (isChecked ) {
+                Log.i("Switch", "Switch is checked");
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 if (notificationManager!=null && !notificationManager.isNotificationPolicyAccessGranted()) {
-                    startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), 0);
+                    startActivityForResult(new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS), SET_NOTIFICATION_POLICY_REQUEST);
+                } else {
+                    Log.i("Background Service", "Service Starting");
+                    startService(backgroundService);
                 }
-                Log.d("Background Service", "Service Starting");
-                startService(backgroundService);
             } else {
                 stopService(backgroundService);
             }
         } catch (Exception e){
             Log.e("Notification Manager", e.getMessage());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("Activity Result", "Method called" + requestCode);
+        if(requestCode==0){
+            Log.i("Activity Result", "Correct Policy Request");
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager!=null && notificationManager.isNotificationPolicyAccessGranted()) {
+                Log.i("Background Service", "Service Starting");
+                startService(backgroundService);
+            } else{
+                Switch theSwitch = findViewById(R.id.serviceSwitch);
+                theSwitch.setChecked(false);
+                isChecked = false;
+            }
         }
     }
 
