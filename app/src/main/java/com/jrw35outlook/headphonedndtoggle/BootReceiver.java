@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class BootReceiver extends BroadcastReceiver {
-    private final int CHECKED = 1;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -32,7 +31,7 @@ public class BootReceiver extends BroadcastReceiver {
                 stringBuilder.append(currentString);
             }
             reader.close();
-            checked = (Integer.parseInt(stringBuilder.toString())==CHECKED);
+            checked = stringBuilder.toString().equals(String.valueOf(R.string.checked));
         } catch (Exception e) {
             Log. e("File", e.getMessage());
         }
