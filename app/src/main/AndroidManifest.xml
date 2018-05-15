@@ -20,16 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="true" />
+
         <receiver
             android:name=".HeadphoneReceiver"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.ACCESS_NOTIFICATION_POLICY">
-        </receiver>
+            android:permission="android.permission.ACCESS_NOTIFICATION_POLICY"></receiver>
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
@@ -37,6 +38,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".NotificationPolicyReceiver"
+            android:enabled="true"
+            android:exported="true">
         </receiver>
     </application>
 
