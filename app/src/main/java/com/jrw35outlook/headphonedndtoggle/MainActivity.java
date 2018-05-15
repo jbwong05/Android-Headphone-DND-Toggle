@@ -17,8 +17,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
-    private final int CHECKED = 1;
-    private final int NOT_CHECKED = 0;
     private final int SET_NOTIFICATION_POLICY_REQUEST = 0;
     private File appStateFile;
     private boolean isChecked;
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop(){
         super.onStop();
-        writeFile(isChecked ? CHECKED : NOT_CHECKED);
+        writeFile(isChecked ? String.valueOf(R.string.checked) : String.valueOf(R.string.not_checked));
     }
 
     public void onSwitchClick(View view){
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             isChecked = readFile();
         } else{
             Log.d("State file", "State file does not exist");
-            writeFile(NOT_CHECKED);
+            writeFile(String.valueOf(R.string.checked));
             isChecked = false;
         }
         backgroundService = new Intent(this, BackgroundService.class);
@@ -105,19 +103,19 @@ public class MainActivity extends AppCompatActivity {
             }
             reader.close();
             Log.d("File", stringBuilder.toString());
-            checked = (Integer.parseInt(stringBuilder.toString())==CHECKED);
+            checked = stringBuilder.toString().equals(String.valueOf(R.string.checked));
         } catch (Exception e) {
             Log.e("File", e.toString());
         }
         return checked;
     }
 
-    private void writeFile(int checked){
+    private void writeFile(String checked){
         FileOutputStream outputStream;
         try {
             outputStream = openFileOutput(String.valueOf(R.string.current_app_state_filename), Context.MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-            writer.write("" + checked);
+            writer.write(checked);
             writer.close();
         } catch (Exception e) {
             Log.e("File", e.getMessage());
