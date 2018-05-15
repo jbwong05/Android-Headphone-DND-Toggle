@@ -27,6 +27,7 @@
             android:exported="true" />
         <receiver
             android:name=".HeadphoneReceiver"
+            android:permission="android.permission.ACCESS_NOTIFICATION_POLICY"
             android:enabled="true"
             android:exported="true">
         </receiver>

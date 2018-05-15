@@ -1,5 +1,6 @@
 package com.jrw35outlook.headphonedndtoggle;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,7 +30,7 @@ public class BackgroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        this.registerReceiver(receiver, filter);
+        this.registerReceiver(receiver, filter, Manifest.permission.ACCESS_NOTIFICATION_POLICY, null);
         Log.d("Service", "Service Started");
         return START_STICKY;
     }
