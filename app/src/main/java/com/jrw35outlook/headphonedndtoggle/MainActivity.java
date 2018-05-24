@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
             isChecked = false;
         }
         backgroundService = new Intent(this, BackgroundService.class);
+        backgroundService.putExtra(String.valueOf(R.string.intent_name), true);
     }
 
     public void onSwitchClick(View view){

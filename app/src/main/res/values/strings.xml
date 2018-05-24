@@ -4,4 +4,5 @@
     <string name="current_app_state_filename">state</string>
     <string name="checked">1</string>
     <string name="not_checked">0</string>
+    <string name="intent_name">Start before write</string>
 </resources>
