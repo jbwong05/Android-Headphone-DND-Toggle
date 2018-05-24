@@ -38,8 +38,7 @@ public class BackgroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        boolean startBeforeWrite = intent.getBooleanExtra(String.valueOf(R.string.intent_name), false);
-        if(startBeforeWrite || file.readFile()){
+        if((intent!=null && intent.getBooleanExtra(String.valueOf(R.string.intent_name), false)) || file.readFile()){
             this.registerReceiver(headphoneReceiver, headphoneFilter, Manifest.permission.ACCESS_NOTIFICATION_POLICY, null);
             this.registerReceiver(policyReceiver, policyFilter);
             Log.d("Service", "Service Started");
