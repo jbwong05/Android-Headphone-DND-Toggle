@@ -1,10 +1,10 @@
 package com.jrw35outlook.headphonedndtoggle;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private final int SET_NOTIFICATION_POLICY_REQUEST = 0;
     private File appStateFile;
     private boolean isChecked;
