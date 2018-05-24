@@ -9,24 +9,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 public class MainActivity extends Activity {
-    private final int SET_NOTIFICATION_POLICY_REQUEST = 0;
-    private File appStateFile;
+    private static final int SET_NOTIFICATION_POLICY_REQUEST = 0;
     private boolean isChecked;
     private Intent backgroundService;
+    private FileAccessor file;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        appStateFile = retrieveFile();
         initializePrivates();
         setSwitch();
     }
@@ -34,7 +27,20 @@ public class MainActivity extends Activity {
     @Override
     protected void onStop(){
         super.onStop();
-        writeFile(isChecked ? String.valueOf(R.string.checked) : String.valueOf(R.string.not_checked));
+        file.writeFile(isChecked ? String.valueOf(R.string.checked) : String.valueOf(R.string.not_checked));
+    }
+
+    private void initializePrivates(){
+        file = new FileAccessor(getApplicationContext());
+        if(file.fileExists()){
+            Log.d("State File", "State file exists");
+            isChecked = file.readFile();
+        } else{
+            Log.d("State file", "State file does not exist");
+            file.writeFile(String.valueOf(R.string.checked));
+            isChecked = false;
+        }
+        backgroundService = new Intent(this, BackgroundService.class);
     }
 
     public void onSwitchClick(View view){
@@ -71,54 +77,6 @@ public class MainActivity extends Activity {
                 theSwitch.setChecked(false);
                 isChecked = false;
             }
-        }
-    }
-
-    private File retrieveFile(){
-        File directory = getApplicationContext().getFilesDir();
-        return new File(directory, String.valueOf(R.string.current_app_state_filename));
-    }
-
-    private void initializePrivates(){
-        if(appStateFile.exists()){
-            Log.d("State File", "State file exists");
-            isChecked = readFile();
-        } else{
-            Log.d("State file", "State file does not exist");
-            writeFile(String.valueOf(R.string.checked));
-            isChecked = false;
-        }
-        backgroundService = new Intent(this, BackgroundService.class);
-    }
-
-    private boolean readFile(){
-        boolean checked = false;
-        try {
-            FileInputStream inputStream = getApplicationContext().openFileInput(String.valueOf(R.string.current_app_state_filename));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String currentString;
-            StringBuilder stringBuilder = new StringBuilder();
-            while ( (currentString = reader.readLine()) != null ) {
-                stringBuilder.append(currentString);
-            }
-            reader.close();
-            Log.d("File", stringBuilder.toString());
-            checked = stringBuilder.toString().equals(String.valueOf(R.string.checked));
-        } catch (Exception e) {
-            Log.e("File", e.toString());
-        }
-        return checked;
-    }
-
-    private void writeFile(String checked){
-        FileOutputStream outputStream;
-        try {
-            outputStream = openFileOutput(String.valueOf(R.string.current_app_state_filename), Context.MODE_PRIVATE);
-            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-            writer.write(checked);
-            writer.close();
-        } catch (Exception e) {
-            Log.e("File", e.getMessage());
         }
     }
 

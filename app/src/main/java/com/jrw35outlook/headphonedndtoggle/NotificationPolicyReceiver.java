@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-
 public class NotificationPolicyReceiver extends BroadcastReceiver {
 
     @Override
@@ -18,23 +15,12 @@ public class NotificationPolicyReceiver extends BroadcastReceiver {
         // an Intent broadcast.
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager!=null && !notificationManager.isNotificationPolicyAccessGranted()) {
-            writeFile(context, String.valueOf(R.string.not_checked));
+            FileAccessor file = new FileAccessor(context);
+            file.writeFile(String.valueOf(R.string.not_checked));
             Intent serviceIntent = new Intent(context, BackgroundService.class);
             Log.i("Service", "Attempting to stop service");
             context.stopService(serviceIntent);
             Toast.makeText(context, "Headphone DND Service Stopped", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void writeFile(Context context, String checked){
-        FileOutputStream outputStream;
-        try {
-            outputStream = context.openFileOutput(String.valueOf(R.string.current_app_state_filename), Context.MODE_PRIVATE);
-            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-            writer.write(checked);
-            writer.close();
-        } catch (Exception e) {
-            Log.e("File", e.getMessage());
         }
     }
 }
