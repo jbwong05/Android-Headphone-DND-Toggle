@@ -39,6 +39,18 @@ public class FileAccessor {
         }
     }
 
+    public void writeTimeFile(String filename, String time){
+        FileOutputStream outputStream;
+        try {
+            outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+            writer.append(time + "\n");
+            writer.close();
+        } catch (Exception e) {
+            Log.e("File", e.getMessage());
+        }
+    }
+
     public boolean readFile(){
         boolean checked = false;
         try {
