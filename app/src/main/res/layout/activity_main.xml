@@ -4,21 +4,118 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <Switch
         android:id="@+id/serviceSwitch"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="362dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="8dp"
         android:checked="false"
-        android:onClick="onSwitchClick"
-        android:text="@string/switch_text"
+        android:onClick="onMainSwitchClick"
+        android:text="@string/main_switch_text"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/reenableSwitch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/reenableSwitch"
+        android:layout_width="362dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:onClick="onReenableSwitchClick"
+        android:text="@string/reenable_switch_text"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/daysButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serviceSwitch" />
+
+    <Button
+        android:id="@+id/daysButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="384dp"
+        android:layout_height="47dp"
+        android:onClick="onDaysButtonClick"
+        android:text="@string/day_button_text"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/daysTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reenableSwitch" />
+
+    <TextView
+        android:id="@+id/daysTextView"
+        android:layout_width="361dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="11dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/startTimeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daysButton" />
+
+    <Button
+        android:id="@+id/startTimeButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="384dp"
+        android:layout_height="47dp"
+        android:onClick="onStartTimeButtonClick"
+        android:text="@string/start_time_button_text"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/startTimeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/daysTextView" />
+
+    <TextView
+        android:id="@+id/startTimeTextView"
+        android:layout_width="361dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/endTimeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startTimeButton" />
+
+    <Button
+        android:id="@+id/endTimeButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="384dp"
+        android:layout_height="47dp"
+        android:onClick="onEndTimeButtonClick"
+        android:text="@string/end_time_button_text"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/endTimeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startTimeTextView" />
+
+    <TextView
+        android:id="@+id/endTimeTextView"
+        android:layout_width="361dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginStart="11dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/endTimeButton" />
+
 </android.support.constraint.ConstraintLayout>

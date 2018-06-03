@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Headphone DND Toggle</string>
-    <string name="switch_text">Service Enabled</string>
+    <string name="main_switch_text">Service Enabled</string>
+    <string name="reenable_switch_text">Re-enable DND on unplug as scheduled</string>
+    <string name="day_button_text">Days</string>
+    <string name="start_time_button_text">Start time</string>
+    <string name="end_time_button_text">End time</string>
     <string name="current_app_state_filename">state</string>
     <string name="checked">1</string>
     <string name="not_checked">0</string>
+    <string name="reenable_dnd_filename">reenable</string>
+    <string name="renable">1</string>
+    <string name="dont_renable">0</string>
 </resources>

@@ -11,7 +11,7 @@ public class BootReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
         FileAccessor file = new FileAccessor(context);
-        if(file.readFile()){
+        if(file.readStateFile()){
             Intent backgroundService = new Intent(context, BackgroundService.class);
             context.startService(backgroundService);
         }

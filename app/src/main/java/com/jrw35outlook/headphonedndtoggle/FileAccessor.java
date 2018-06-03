@@ -11,20 +11,14 @@ import java.io.OutputStreamWriter;
 
 public class FileAccessor {
     private Context context;
-    private File stateFile;
 
     public FileAccessor(Context theContext){
         context = theContext;
-        stateFile = retrieveFile();
     }
 
-    private File retrieveFile(){
+    public boolean fileExists(String filename){
         File directory = context.getFilesDir();
-        return new File(directory, String.valueOf(R.string.current_app_state_filename));
-    }
-
-    public boolean fileExists(){
-        return stateFile.exists();
+        return new File(directory, filename).exists();
     }
 
     public void writeFile(String filename, String checked){
@@ -39,7 +33,7 @@ public class FileAccessor {
         }
     }
 
-    public boolean readFile(){
+    public boolean readStateFile(){
         boolean checked = false;
         try {
             FileInputStream inputStream = context.openFileInput(String.valueOf(R.string.current_app_state_filename));
@@ -56,5 +50,37 @@ public class FileAccessor {
             Log.e("File", e.toString());
         }
         return checked;
+    }
+
+    public ReenableState readReenableFile(){
+        /*
+        file format:
+        1 //flag to re-enable
+        1001011 //flags for days
+        1205 //start time without :
+        0636 //end time without :
+         */
+        ReenableState reenableState = new ReenableState();
+        try {
+            FileInputStream inputStream = context.openFileInput(String.valueOf(R.string.reenable_dnd_filename));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String currentString;
+            currentString = reader.readLine();
+            if(currentString.substring(0,1).equals(String.valueOf(R.string.renable))){
+                currentString = reader.readLine();
+                reenableState.setDays(currentString);
+                currentString = reader.readLine();
+                reenableState.setStartTime(currentString);
+                currentString = reader.readLine();
+                reenableState.setEndTime(currentString);
+            } else{
+                reenableState.setToReenable(false);
+            }
+            reader.close();
+            Log.i("File", currentString);
+        } catch (Exception e) {
+            Log.e("File", e.toString());
+        }
+        return reenableState;
     }
 }
