@@ -30,7 +30,7 @@ public class FileAccessor {
     public void writeFile(String filename, String checked){
         FileOutputStream outputStream;
         try {
-            outputStream = context.openFileOutput(String.valueOf(filename), Context.MODE_PRIVATE);
+            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(outputStream);
             writer.write(checked);
             writer.close();
