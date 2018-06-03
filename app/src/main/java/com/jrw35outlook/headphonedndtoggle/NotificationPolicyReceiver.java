@@ -16,7 +16,7 @@ public class NotificationPolicyReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (notificationManager!=null && !notificationManager.isNotificationPolicyAccessGranted()) {
             FileAccessor file = new FileAccessor(context);
-            file.writeFile(String.valueOf(R.string.not_checked));
+            file.writeFile(String.valueOf(R.string.current_app_state_filename), String.valueOf(R.string.not_checked));
             Intent serviceIntent = new Intent(context, BackgroundService.class);
             Log.i("Service", "Attempting to stop service");
             context.stopService(serviceIntent);
