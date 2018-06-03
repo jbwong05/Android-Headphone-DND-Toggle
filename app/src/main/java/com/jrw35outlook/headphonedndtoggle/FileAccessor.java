@@ -27,24 +27,12 @@ public class FileAccessor {
         return stateFile.exists();
     }
 
-    public void writeFile(String checked){
+    public void writeFile(String filename, String checked){
         FileOutputStream outputStream;
         try {
-            outputStream = context.openFileOutput(String.valueOf(R.string.current_app_state_filename), Context.MODE_PRIVATE);
+            outputStream = context.openFileOutput(String.valueOf(filename), Context.MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(outputStream);
             writer.write(checked);
-            writer.close();
-        } catch (Exception e) {
-            Log.e("File", e.getMessage());
-        }
-    }
-
-    public void writeTimeFile(String filename, String time){
-        FileOutputStream outputStream;
-        try {
-            outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
-            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-            writer.append(time + "\n");
             writer.close();
         } catch (Exception e) {
             Log.e("File", e.getMessage());

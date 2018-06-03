@@ -39,7 +39,7 @@ public class BackgroundService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        file.writeTimeFile(String.valueOf(R.string.start_time_filename), Calendar.getInstance().getTime().toString());
+        file.writeFile(String.valueOf(R.string.start_time_filename), Calendar.getInstance().getTime().toString());
         if((intent!=null && intent.getBooleanExtra(String.valueOf(R.string.intent_name), false)) || file.readFile()){
             this.registerReceiver(headphoneReceiver, headphoneFilter, Manifest.permission.ACCESS_NOTIFICATION_POLICY, null);
             this.registerReceiver(policyReceiver, policyFilter);
@@ -56,9 +56,9 @@ public class BackgroundService extends Service {
         this.unregisterReceiver(headphoneReceiver);
         this.unregisterReceiver(policyReceiver);
         if(isLowMemory()){
-            file.writeFile(String.valueOf(R.string.not_checked));
+            file.writeFile(String.valueOf(R.string.current_app_state_filename), String.valueOf(R.string.not_checked));
         }
-        file.writeTimeFile(String.valueOf(R.string.stop_time_filename), Calendar.getInstance().getTime().toString());
+        file.writeFile(String.valueOf(R.string.stop_time_filename), Calendar.getInstance().getTime().toString());
         Log.d("Service", "Service Stopped");
     }
 

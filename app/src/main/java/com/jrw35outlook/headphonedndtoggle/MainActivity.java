@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onStop(){
         super.onStop();
-        file.writeFile(isChecked ? String.valueOf(R.string.checked) : String.valueOf(R.string.not_checked));
+        file.writeFile(String.valueOf(R.string.current_app_state_filename), isChecked ? String.valueOf(R.string.checked) : String.valueOf(R.string.not_checked));
     }
 
     private void initializePrivates(){
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
             isChecked = file.readFile();
         } else{
             Log.d("State file", "State file does not exist");
-            file.writeFile(String.valueOf(R.string.checked));
+            file.writeFile(String.valueOf(R.string.current_app_state_filename), String.valueOf(R.string.checked));
             isChecked = false;
         }
         backgroundService = new Intent(this, BackgroundService.class);
