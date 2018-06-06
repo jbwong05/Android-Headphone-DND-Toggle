@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
         } else{
             reenableState = new ReenableState();
         }
-        if(reenableState.isToReenable()){
+        if(reenableState.toReenable){
             setSwitch((Switch)findViewById(R.id.reenableSwitch), true);
             ((TextView)reenableOptions[1]).setText(reenableState.getDaysString());
             ((TextView)reenableOptions[3]).setText(reenableState.getStartTime());
@@ -113,7 +113,12 @@ public class MainActivity extends Activity {
     }
 
     public void onReenableSwitchClick(View view){
+        reenableState.toReenable = !reenableState.toReenable;
+        if(reenableState.toReenable){//switched to enabled
 
+        } else{
+
+        }
     }
 
     public void onDaysButtonClick(View view){

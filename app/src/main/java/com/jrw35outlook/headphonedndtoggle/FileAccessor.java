@@ -74,7 +74,7 @@ public class FileAccessor {
                 currentString = reader.readLine();
                 reenableState.setEndTime(currentString);
             } else{
-                reenableState.setToReenable(false);
+                reenableState.toReenable = false;
             }
             reader.close();
             Log.i("File", currentString);

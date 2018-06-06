@@ -3,7 +3,7 @@ package com.jrw35outlook.headphonedndtoggle;
 import java.util.Calendar;
 
 public class ReenableState {
-    private boolean toReenable;
+    public boolean toReenable;
     private boolean[] days;
     private Calendar startTime;
     private Calendar endTime;
@@ -13,10 +13,6 @@ public class ReenableState {
         days = null;
         startTime = null;
         endTime = null;
-    }
-
-    public boolean isToReenable() {
-        return toReenable;
     }
 
     public boolean[] getDaysArray() {
@@ -43,10 +39,6 @@ public class ReenableState {
 
     private String getTime(Calendar calendar){
         return "" + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE);
-    }
-
-    public void setToReenable(boolean toReenable) {
-        this.toReenable = toReenable;
     }
 
     public void setDays(String theDays){
