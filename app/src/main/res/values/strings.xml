@@ -11,4 +11,13 @@
     <string name="reenable_dnd_filename">reenable</string>
     <string name="renable">1</string>
     <string name="dont_renable">0</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="extra_selected_buttons_array_id">2</string>
+    <string name="selected_buttons_return_id">3</string>
 </resources>

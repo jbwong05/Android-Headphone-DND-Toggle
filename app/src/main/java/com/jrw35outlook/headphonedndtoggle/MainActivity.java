@@ -1,18 +1,28 @@
 package com.jrw35outlook.headphonedndtoggle;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.NotificationManager;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
+
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
 
 public class MainActivity extends Activity {
     private static final int SET_NOTIFICATION_POLICY_REQUEST = 0;
+    private static final int GET_DAYS_REQUEST = 1;
     private boolean isChecked;
     private FileAccessor file;
     private ReenableState reenableState;
@@ -94,7 +104,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("Activity Result", "Method called" + requestCode);
-        if(requestCode==0){
+        if(requestCode==SET_NOTIFICATION_POLICY_REQUEST){
             Log.i("Activity Result", "Correct Policy Request");
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             if (notificationManager!=null && notificationManager.isNotificationPolicyAccessGranted()) {
@@ -105,6 +115,15 @@ public class MainActivity extends Activity {
                 theSwitch.setChecked(false);
                 isChecked = false;
             }
+        } else if(requestCode==GET_DAYS_REQUEST){
+            reenableState.updateDays(data.getBooleanArrayExtra(String.valueOf(R.string.selected_buttons_return_id)));
+            String text = "";
+            for(int i=0; i<7; i++){
+                if(reenableState.getDaysArray()[i]){
+                    text += Day.values()[i].toString() + " ";
+                }
+            }
+            ((TextView)reenableOptions[1]).setText(text);
         }
     }
 
@@ -115,21 +134,45 @@ public class MainActivity extends Activity {
     public void onReenableSwitchClick(View view){
         reenableState.toReenable = !reenableState.toReenable;
         if(reenableState.toReenable){//switched to enabled
-
+            toggleReenableOptionsVisibility(View.VISIBLE);
         } else{
-
+            toggleReenableOptionsVisibility(View.INVISIBLE);
         }
     }
 
     public void onDaysButtonClick(View view){
-
+        Intent intent = new Intent(this, DayPickerActivity.class);
+        intent.putExtra(String.valueOf(R.string.extra_selected_buttons_array_id), reenableState.getDaysArray());
+        startActivityForResult(intent, GET_DAYS_REQUEST);
     }
 
     public void onStartTimeButtonClick(View view){
-
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
     }
 
     public void onEndTimeButtonClick(View view){
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
+    }
 
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+        }
     }
 }

@@ -57,8 +57,8 @@ public class FileAccessor {
         file format:
         1 //flag to re-enable
         1001011 //flags for days
-        1205 //start time without :
-        0636 //end time without :
+        1205a //start time without :
+        0636a //end time without :
          */
         ReenableState reenableState = new ReenableState();
         try {

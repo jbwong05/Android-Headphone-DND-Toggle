@@ -30,7 +30,7 @@
             android:name=".HeadphoneReceiver"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.ACCESS_NOTIFICATION_POLICY"></receiver>
+            android:permission="android.permission.ACCESS_NOTIFICATION_POLICY" />
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
@@ -42,8 +42,9 @@
         <receiver
             android:name=".NotificationPolicyReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true"></receiver>
+
+        <activity android:name=".DayPickerActivity"></activity>
     </application>
 
 </manifest>

@@ -10,9 +10,9 @@ public class ReenableState {
 
     public ReenableState(){
         toReenable = false;
-        days = null;
-        startTime = null;
-        endTime = null;
+        days = new boolean[7];
+        setStartTime("1200a");
+        setEndTime("0100a");
     }
 
     public boolean[] getDaysArray() {
@@ -48,6 +48,10 @@ public class ReenableState {
         }
     }
 
+    public void updateDays(boolean[] newDays){
+        days = newDays;
+    }
+
     public void setStartTime(String theStartTime) {
         setTime(startTime, theStartTime);
     }
@@ -61,6 +65,11 @@ public class ReenableState {
         calendar.clear();
         calendar.set(Calendar.HOUR, Integer.parseInt(time.substring(0, 2))-1);
         calendar.set(Calendar.MINUTE, Integer.parseInt(time.substring(2, 4))-1);
+        if (time.substring(4, 5).equals("a")) {
+            calendar.set(Calendar.AM_PM, Calendar.AM);
+        } else {
+            calendar.set(Calendar.AM_PM, Calendar.PM);
+        }
     }
 
     public String toString(){

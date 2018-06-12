@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DayPickerActivity">
+
+    <CheckBox
+        android:id="@+id/sundayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="290dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:allowUndo="true"
+        android:checked="false"
+        android:text="@string/sunday"
+        app:layout_constraintBottom_toTopOf="@+id/mondayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/mondayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="286dp"
+        android:layout_marginStart="16dp"
+        android:allowUndo="true"
+        android:text="@string/monday"
+        app:layout_constraintBottom_toTopOf="@+id/tuesdayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sundayButton" />
+
+    <CheckBox
+        android:id="@+id/tuesdayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="283dp"
+        android:layout_marginStart="16dp"
+        android:allowUndo="true"
+        android:text="@string/tuesday"
+        app:layout_constraintBottom_toTopOf="@+id/wednesdayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mondayButton" />
+
+    <CheckBox
+        android:id="@+id/wednesdayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="264dp"
+        android:layout_marginStart="16dp"
+        android:allowUndo="true"
+        android:text="@string/wednesday"
+        app:layout_constraintBottom_toTopOf="@+id/thursdayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tuesdayButton" />
+
+    <CheckBox
+        android:id="@+id/thursdayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="278dp"
+        android:layout_marginStart="16dp"
+        android:allowUndo="true"
+        android:text="@string/thursday"
+        app:layout_constraintBottom_toTopOf="@+id/fridayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wednesdayButton" />
+
+    <CheckBox
+        android:id="@+id/fridayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="298dp"
+        android:layout_marginStart="16dp"
+        android:allowUndo="true"
+        android:text="@string/friday"
+        app:layout_constraintBottom_toTopOf="@+id/saturdayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thursdayButton" />
+
+    <CheckBox
+        android:id="@+id/saturdayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="327dp"
+        android:layout_marginEnd="280dp"
+        android:layout_marginStart="16dp"
+        android:allowUndo="true"
+        android:checked="false"
+        android:text="@string/saturday"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fridayButton" />
+
+    <Button
+        android:id="@+id/doneDayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="onDoneButtonClick"
+        android:text="Done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
